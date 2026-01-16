@@ -12,7 +12,7 @@ public class SelectorsXpath {
     WebDriver driver = new ChromeDriver();
 
     @Test
-    public void phonebookTest(){
+    public void phonebookTest() {
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -33,7 +33,7 @@ public class SelectorsXpath {
         WebElement fieldEmail = driver.findElement(By
                 .xpath("//input[@placeholder='Email']"));
         int i = new Random().nextInt(1000);
-        fieldEmail.sendKeys("qakjiuoy"+i+"@gmail.com");
+        fieldEmail.sendKeys("qakjiuoy" + i + "@gmail.com");
         pause(3);
         WebElement fieldPassword = driver.findElement(By.
                 xpath("//*[@name='password']"));
@@ -51,13 +51,49 @@ public class SelectorsXpath {
                 (By.xpath("//button"));
         System.out.println(buttons);
         System.out.println(buttons.get(1).getText());
-
-
     }
 
-    public void pause(int time){
+    @Test
+    public void iLCarroXpathTest() {
+        driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.get("https://ilcarro.web.app/search");
+        WebElement btnLogin = driver.findElement(By
+                .xpath("//a[@ng-reflect-router-link='login']"));
+        btnLogin.click();
+        pause(3);
+        // BYclassName "ng-dirty"
+        // Xpath //*[@class='ng-dirty ng-valid ng-touched']
+        WebElement fieldEmail = driver.findElement(By
+                .xpath("//input[@id='email']"));
+        fieldEmail.sendKeys("sima_simonova370@gmail.com");
+        pause(3);
+        WebElement fieldPassword = driver.findElement(By
+                .xpath("//*[@formcontrolname='password']"));
+        //   //form/div[last()]/input  вниз к ребенку
+        fieldPassword.sendKeys("BSas124!");
+        pause(3);
+        WebElement btnYalla = driver.findElement(By
+                .xpath("//button[text()='Y’alla!']"));
+        //  //button[start-with(text(),'Y’a')]
+        btnYalla.click();
+        pause(3);
+        WebElement btnOk = driver.findElement(By
+                .xpath("//button[@class='positive-button ng-star-inserted']"));
+        btnOk.click();
+        pause(3);
+        WebElement btnLogout = driver.findElement(By
+                .xpath("//a[contains(text(), 'Logout')]"));
+        btnLogout.click();
+        pause(3);
+        driver.quit();
+        //  //input[@id='password']/../.. вверх по дереву
+    }
+
+    public void pause(int time) {
         try {
-            Thread.sleep(time *1000L);
+            Thread.sleep(time * 1000L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
